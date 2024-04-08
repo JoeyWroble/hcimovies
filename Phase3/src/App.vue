@@ -145,31 +145,15 @@
                   </li>               
                 </ul>
               </li>
+              <li>
 
-              <li class="dropend">
-                <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
-                  Rating
-                </a>
-
-                <ul class="dropdown-menu">
-                  <li v-for="rating in ratings" :key="rating">
-                    <button class="dropdown-item" type="button" @click="rat.push(rating)">{{ rating }}</button>
-                  </li>
-                </ul>
               </li>
+              <input class="form-control" type="text" v-model="rating" placeholder="Enter rating"/>
               <li>
                 <input class="form-control" type="text" v-model="director" placeholder="Enter Director"/>
-                <!-- <div class="d-flex">
-                <input type="text" class="form-control dropdown-input" placeholder="Enter director">
-                <button type="button" class="btn btn-sm btn-success dropdown-item">Submit</button>
-              </div> -->
               </li>
               <li>
                 <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
-                <!-- <div class="d-flex">
-                  <input type="text" class="form-control dropdown-input" placeholder="Enter cast">
-                  <button type="button" class="btn btn-sm btn-success dropdown-item">Submit</button>
-                </div> -->
               </li>
               <li>
                 <button type="button" class="btn btn-success" @click="fitleredMovies()">Add Filter</button>
