@@ -115,19 +115,19 @@
             <a :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
           </li>
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'My movies', 'nav-link': current != 'My movies'}" aria-current="page" @click="current = 'My movies'">My movies</a>
+            <a :class="{'nav-link active': current == 'My Movies', 'nav-link': current != 'My movies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
           </li>
 
 
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-              filter
+              Filter
             </a>
             <ul class="dropdown-menu">
               <li class="dropend">
                 <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
-                  genre
+                  Genre
                 </a>
                 <ul class="dropdown-menu">
                   <li v-for="genre of genres" :key="genre">
@@ -148,7 +148,7 @@
 
               <li class="dropend">
                 <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
-                  rating
+                  Rating
                 </a>
 
                 <ul class="dropdown-menu">
@@ -158,24 +158,24 @@
                 </ul>
               </li>
               <li>
-                <input class="form-control" type="text" v-model="director" placeholder="Enter director"/>
+                <input class="form-control" type="text" v-model="director" placeholder="Enter Director"/>
                 <!-- <div class="d-flex">
                 <input type="text" class="form-control dropdown-input" placeholder="Enter director">
                 <button type="button" class="btn btn-sm btn-success dropdown-item">Submit</button>
               </div> -->
               </li>
               <li>
-                <input class="form-control" type="text" v-model="cast" placeholder="Enter cast"/>
+                <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
                 <!-- <div class="d-flex">
                   <input type="text" class="form-control dropdown-input" placeholder="Enter cast">
                   <button type="button" class="btn btn-sm btn-success dropdown-item">Submit</button>
                 </div> -->
               </li>
               <li>
-                <button type="button" class="btn btn-success" @click="fitleredMovies()">Add filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredMovies()">Add Filter</button>
               </li>
               <li>
-                <button type="button" class="btn btn-success">Reset filters</button>
+                <button type="button" class="btn btn-success">Reset Filters</button>
               </li>
             </ul>
           </li>
@@ -192,7 +192,7 @@
     </div>
   </div>
   <div v-else>
-    loading data...
+    Loading Data...
   </div>
 </template>
 
