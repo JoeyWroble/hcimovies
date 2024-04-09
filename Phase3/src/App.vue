@@ -2,6 +2,10 @@
   import papaparse from 'papaparse';
   import {ref, onMounted} from 'vue';
 
+
+  import Home from "./Home.vue"
+  import MyMovies from "./MyMovies.vue"
+  import Watchlist from "./Watchlist.vue"
   const current = ref("Home")
   const movieTitles = ref([])
   const Data = ref([]);
@@ -115,7 +119,7 @@
             <a :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
           </li>
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'My Movies', 'nav-link': current != 'My movies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
+            <a :class="{'nav-link active': current == 'MyMovies', 'nav-link': current != 'MyMovies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
           </li>
 
 
@@ -155,8 +159,14 @@
               <li>
                 <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
               </li>
-              <li>
+              <li v-if="current == 'Home'">
                 <button type="button" class="btn btn-success" @click="fitleredMovies()">Add Filter</button>
+              </li>
+              <li v-else-if="current == 'MyMovies'">
+                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Add Filter</button>
+              </li>
+              <li v-else>
+                <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Add Filter</button>
               </li>
               <li>
                 <button type="button" class="btn btn-success">Reset Filters</button>
@@ -170,13 +180,25 @@
 </nav>
 
 
-  <div v-if="loaded">
-    <div v-for="movie of movieTitles">
-      <p>{{ movie }}</p>
-    </div>
+<div v-if="loaded">
+  <div v-if="current == 'Home'">
+    <Home
+      :movieTitles="movieTitles"
+    />
+  </div>
+  <div v-else-if="current == 'Watchlist'">
+    <Watchlist
+
+    />
   </div>
   <div v-else>
-    Loading Data...
+    <MyMovies
+
+    />
   </div>
+</div>
+<div v-else>
+  Loading Data...
+</div>
 </template>
 
