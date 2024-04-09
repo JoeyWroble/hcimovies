@@ -9,10 +9,6 @@
   const genres = ref([])
   const ratings = ref([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
   const ratingsOfAllMovies = ref([])
-
-
-
-
   const selectedGenres = ref([])
   const rat = ref([])
   const dataFile = "./src/components/imdb_top_1000.csv"
@@ -186,9 +182,9 @@
 </nav>
 
 
-  <div v-if="loaded">
-    <div v-for="movie of movieTitles">
-      <p>{{ movie }}</p>
+<div v-if="loaded">
+    <div v-for="(movie, index) of movieTitles" :key="index">
+      <img :src="Data[index].poster_link" :alt="movie" class="movie-poster" onError="this.src='placeholder.jpg'" /> <p>{{ movie.title }}</p>
     </div>
   </div>
   <div v-else>
