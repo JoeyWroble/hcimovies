@@ -1,4 +1,6 @@
 <script setup>
+  import Watchlist from './Watchlist.vue'
+  import MyMovies from './MyMovies.vue'
   import papaparse from 'papaparse';
   import {ref, onMounted} from 'vue';
 
@@ -10,18 +12,11 @@
   const ratings = ref([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
   const ratingsOfAllMovies = ref([])
 
-
-
-
   const selectedGenres = ref([])
   const rat = ref([])
   const dataFile = "./src/components/imdb_top_1000.csv"
 
-
-
   function fitleredMovies() {
-
-    
     const weWantTheseMovies = ref([])
     for (let item of Data.value) {
       const listOfGen = item.Genre.split(", ")
@@ -63,8 +58,6 @@
     .then((text) => loadData(text))
     .then((parsedText) => showData(parsedText)));
 
-
-
   async function loadData(dataText) {
     console.log("ready to load data");
     let data = papaparse.parse(dataText, {delimter: ",", header: true})
@@ -93,7 +86,6 @@
       ratingsOfAllMovies.value.push(parsedData.data[i].IMDB_Rating)
     }
     uniqueGenres(parsedData)
-    
   }
 </script>
 
@@ -117,8 +109,6 @@
           <li class="nav-item">
             <a :class="{'nav-link active': current == 'My Movies', 'nav-link': current != 'My movies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
           </li>
-
-
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
@@ -169,14 +159,22 @@
   </div>
 </nav>
 
-
-  <div v-if="loaded">
-    <div v-for="movie of movieTitles">
-      <p>{{ movie }}</p>
+  <div v-if="current === 'Home'">
+    <div v-if="loaded">
+      <div v-for="movie of movieTitles">
+        <p>{{ movie }}</p>
+      </div>
+    </div>
+    <div v-else>
+      Loading Data...
     </div>
   </div>
-  <div v-else>
-    Loading Data...
+
+  <div v-else-if="current === 'Watchlist'">
+    <Watchlist />
+  </div>
+
+  <div v-else-if="current === 'My Movies'">
+    <MyMovies />
   </div>
 </template>
-
