@@ -1,6 +1,5 @@
 <script setup>
-  import Watchlist from './Watchlist.vue'
-  import MyMovies from './MyMovies.vue'
+
   import papaparse from 'papaparse';
   import {ref, onMounted} from 'vue';
 
@@ -93,6 +92,7 @@
 </script>
 
 <template>
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
@@ -104,7 +104,7 @@
       <div class="navbar-nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">test</a>
+            <a :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">Home</a>
           </li>
           <li class="nav-item">
             <a :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
@@ -138,10 +138,7 @@
                   </li>               
                 </ul>
               </li>
-              <li>
-
-              </li>
-              <input class="form-control" type="text" v-model="rating" placeholder="Enter rating"/>
+                <input class="form-control" type="text" v-model="rating" placeholder="Enter rating"/>
               <li>
                 <input class="form-control" type="text" v-model="director" placeholder="Enter Director"/>
               </li>
@@ -166,15 +163,28 @@
       </div>
     </div>
   </div>
-</nav>
+  </nav>
 
 
-  <div v-if="loaded">
-    <div v-for="movie of movieTitles">
-      <p>{{ movie }}</p>
+
+
+    <div v-if="loaded">
+      <div v-if="current == 'Home'">
+        <Home
+          :movieTitles=movieTitles
+        />
+      </div>
+      <div v-else-if="current == 'Watchlist'">
+        <Watchlist
+        />
+      </div>
+      <div v-else>
+        <MyMovies
+        />
+      </div>
     </div>
-  </div>
-  <div v-else>
-    Loading Data...
-  </div>
+
+    <div v-else>
+      <h1>Loading Data...</h1>
+    </div>
 </template>
