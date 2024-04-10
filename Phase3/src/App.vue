@@ -11,7 +11,6 @@
   const genres = ref([])
   const ratings = ref([10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
   const ratingsOfAllMovies = ref([])
-
   const selectedGenres = ref([])
   const rat = ref([])
   const dataFile = "./src/components/imdb_top_1000.csv"
@@ -101,7 +100,7 @@
       <div class="navbar-nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">Home</a>
+            <a :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">test</a>
           </li>
           <li class="nav-item">
             <a :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
@@ -160,9 +159,9 @@
 </nav>
 
   <div v-if="current === 'Home'">
-    <div v-if="loaded">
-      <div v-for="movie of movieTitles">
-        <p>{{ movie }}</p>
+  <div v-if="loaded">
+      <div v-for="(movie, index) of movieTitles" :key="index">
+        <img :src="Data[index].poster_link" :alt="movie" class="movie-poster" onError="this.src='placeholder.jpg'" /> <p>{{ movie.title }}</p>
       </div>
     </div>
     <div v-else>
