@@ -1,10 +1,10 @@
 <script setup>
     const props = defineProps({
-        movieTitles: Array
+        Movies: Array
     });
 </script>
 <template>
-    <div v-for="movie of props.movieTitles">
+    <div v-for="movie of props.Movies">
         <p>{{ movie }}</p>
     </div>
 </template>

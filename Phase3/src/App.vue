@@ -7,6 +7,8 @@
   import Home from "./Home.vue"
   import MyMovies from "./MyMovies.vue"
   import Watchlist from "./Watchlist.vue"
+  const weWantTheseMovies = ref([])
+  const rating = ref()
   const current = ref("Home")
   const movieTitles = ref([])
   const Data = ref([]);
@@ -19,29 +21,93 @@
   const dataFile = "./src/components/imdb_top_1000.csv"
 
   function fitleredMovies() {
-    const weWantTheseMovies = ref([])
-    for (let item of Data.value) {
-      const listOfGen = item.Genre.split(", ")
-    
-      const listOfr = rat.value
-      const Title = item.Series_Title
+    weWantTheseMovies.value = []
+    let moviesOfCorrectGenre = []
+    if (selectedGenres.value.length > 0) {
+      for (let item of Data.value) {
+        const listOfGen = item.Genre.split(", ")
+      
+        const listOfr = rat.value
+        const Title = item.Series_Title
 
-      let stat = false
-      console.log("selectedGenres.value: " + selectedGenres.value)
-      for (let G of selectedGenres.value) {
-        if (listOfGen.includes(G)) {
-          stat = true;
-          break;
+        let stat = false
+        console.log("selectedGenres.value: " + selectedGenres.value)
+        for (let G of selectedGenres.value) {
+          if (listOfGen.includes(G)) {
+            stat = true;
+            break;
+          }
+        }
+        if (stat === true) {
+          moviesOfCorrectGenre.push(Title)
         }
       }
-      if (stat === true) {
-        weWantTheseMovies.value.push(Title)
+    }
+    else {
+      console.log("no genres have been selected.")
+      console.log("movieTitles.value: " + movieTitles.value)
+      for (let movie of movieTitles.value) {
+        moviesOfCorrectGenre.push(movie)
       }
     }
-    
-    movieTitles.value = weWantTheseMovies.value
+    //movieTitles.value = weWantTheseMovies.value
 
-    console.log("movieTitles.value: " + movieTitles.value)
+
+    console.log("moviesOfCorrectGenre" + moviesOfCorrectGenre)
+
+
+    let moviesOfCorrectRating = []
+    if (typeof rating.value == 'string') {
+      console.log("defined as string")
+      if (rating.value.length > 0) {
+        console.log("rating.value: " + rating.value)
+        console.log("typeof: " + typeof rating.value)
+        const ratingMap = {'7': ["7", "7.1", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7", "7.8", "7.9"], '8': ["8.1", "8.2", "8.3", "8.4", "8.5", "8.6", "8.7", "8.8", "8.9"], '9': ["9", "9.1", "9.2", "9.3"]}
+        if (rating.value.length == 3 && rating.value.split(".").length == 2) {
+
+          console.log("rating.value is a decimal in the correct form")
+          for (let i in Data.value) {
+            if (Data.value[i].IMDB_Rating == rating.value) {
+              moviesOfCorrectRating.push(Data.value[i].Series_Title)
+            }
+          }
+        }
+        else if (rating.value.length == 1 && ['7', '8', '9'].includes(rating.value)) {
+          console.log("inside else if statement")
+          console.log('rating.value: ' + rating.value)
+          for (let i = 0; i < Data.value.length; i++) {
+            console.log("IMDB_Rating " + Data.value[i].IMDB_Rating)
+            if (ratingMap[rating.value].includes(Data.value[i].IMDB_Rating)) {
+              console.log("inside if statement")
+              moviesOfCorrectRating.push(Data.value[i].Series_Title)
+            }
+          }
+          
+        }
+      }
+    }
+    if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length > 0)) {
+      console.log("we have genre and rating values.")
+      for (let movie of movieTitles.value) {
+        if (moviesOfCorrectGenre.includes(movie) && moviesOfCorrectRating.includes(movie)) {
+          weWantTheseMovies.value.push(movie)
+        }
+      }
+    }
+    else if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length == 0)) {
+      for (let movie of moviesOfCorrectGenre) {
+        weWantTheseMovies.value.push(movie)
+      }
+    }
+
+
+    else if ((moviesOfCorrectGenre.length == 0) && (moviesOfCorrectRating.length > 0)) {
+      for (let movie of moviesOfCorrectRating) {
+        weWantTheseMovies.value.push(movie)
+      }
+    }
+
+
       // const r = item.IMDB_Rating;
   
       // movieTitles.value = movieTitles.value.filter((title) => {
@@ -82,6 +148,7 @@
     parsedData.data.pop()
     Data.value = parsedData.data
     for (let i = 0; i < parsedData.data.length; i++) {
+      weWantTheseMovies.value.push(parsedData.data[i].Series_Title)
       movieTitles.value.push(parsedData.data[i].Series_Title)
     }
     for (let i = 0; i < parsedData.data.length; i++) {
@@ -139,6 +206,7 @@
                 </ul>
               </li>
                 <input class="form-control" type="text" v-model="rating" placeholder="Enter rating"/>
+                <small class="form-text text-muted">Rating must be between 7.6 and 9.3. It can be an integer or a decimal rounded to the tenths place.</small>
               <li>
                 <input class="form-control" type="text" v-model="director" placeholder="Enter Director"/>
               </li>
@@ -170,8 +238,8 @@
 
     <div v-if="loaded">
       <div v-if="current == 'Home'">
-        <Home
-          :movieTitles=movieTitles
+        <Home 
+          :Movies=weWantTheseMovies
         />
       </div>
       <div v-else-if="current == 'Watchlist'">
