@@ -10,6 +10,7 @@
   const weWantTheseMovies = ref([])
   const rating = ref()
   const director = ref()
+  const cast = ref()
   const current = ref("Home")
   const movieTitles = ref([])
   const Data = ref([]);
@@ -98,86 +99,73 @@
 
 
 
-
-    // if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length > 0) && (moviesOfCorrectDirector.length > 0)) {
-    //   console.log("we have genre and rating values.")
-      for (let movie of movieTitles.value) {
-        if (moviesOfCorrectGenre.includes(movie) && moviesOfCorrectRating.includes(movie) && moviesOfCorrectDirector.includes(movie)) {
-          weWantTheseMovies.value.push(movie)
+    let moviesOfCorrectCast = []
+    if (typeof cast.value == 'string' && cast.value.length > 0) {
+      if (cast.value.includes(",")) {
+        cast.value = cast.value.split(",")
+        for (let i in cast.value) {
+          cast.value[i] = cast.value[i].trim()
+          cast.value[i] = cast.value[i].toLowerCase()
+        }
+        for (let i in Data.value) {
+          let c1 = Data.value[i].Star1
+          c1 = c1.toLowerCase()
+          let c2 = Data.value[i].Star2
+          c2 = c2.toLowerCase()
+          let c3 = Data.value[i].Star3
+          c3 = c3.toLowerCase()
+          let c4 = Data.value[i].Star4
+          c4 = c4.toLowerCase()
+          const c = [c1, c2, c3, c4]
+          console.log("c: " + c)
+          let s = true
+          for (let cc of cast.value) {
+            if (!c.includes(cc)) {
+              s = false
+              break
+            }
+          }
+          if (s == true) {
+            moviesOfCorrectCast.push(Data.value[i].Series_Title)
+          }
         }
       }
-  
-    // }
-    // else if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length > 0) && (moviesOfCorrectDirector.length == 0)) {
-    //   for (let movie of moviesOfCorrectGenre) {
-    //     if (moviesOfCorrectGenre.includes(movie) && moviesOfCorrectRating.includes(movie)) {
-    //       weWantTheseMovies.value.push(movie)
-    //     }
-    //   }
-    // }
+      else {
+        for (let i in Data.value) {
+          let c1 = Data.value[i].Star1
+          c1 = c1.toLowerCase()
+          let c2 = Data.value[i].Star2
+          c2 = c2.toLowerCase()
+          let c3 = Data.value[i].Star3
+          c3 = c3.toLowerCase()
+          let c4 = Data.value[i].Star1
+          c1 = c4.toLowerCase()
+          const c = [c1, c2, c3, c4]
+          if (c.includes(cast.value.toLowerCase())) {
+            moviesOfCorrectCast.push(Data.value[i].Series_Title)
+          }
+        }
+      }
 
+    }
+    else {
+      for (let movie of movieTitles.value) {
+        moviesOfCorrectCast.push(movie)
+      }
+    }
 
-    // else if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length == 0) && (moviesOfCorrectDirector.length > 0)) {
-    //   for (let movie of moviesOfCorrectRating) {
-    //     if (moviesOfCorrectGenre.includes(movie) && moviesOfCorrectDirector.includes(movie)) {
-    //       weWantTheseMovies.value.push(movie)
-    //     }
-    //   }
-    // }
-
-    // else if ((moviesOfCorrectGenre.length == 0) && (moviesOfCorrectRating.length > 0) && (moviesOfCorrectDirector.length > 0)) {
-    //   for (let movie of moviesOfCorrectGenre) {
-    //     if (moviesOfCorrectRating.includes(movie) && moviesOfCorrectRating.includes(movie)) {
-    //       weWantTheseMovies.value.push(movie);
-    //     }
-    //   }
-    // }
-
-    // else if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length == 0) && (moviesOfCorrectDirector.length == 0)) {
-    //   for (let movie of moviesOfCorrectGenre) {
-    //     if (moviesOfCorrectGenre.includes(movie)) {
-    //       weWantTheseMovies.value.push(movie)
-    //     }
-    //   }
-    // }
-
-
-    // else if ((moviesOfCorrectGenre.length == 0) && (moviesOfCorrectRating.length > 0) && (moviesOfCorrectDirector.length == 0)) {
-    //   for (let movie of moviesOfCorrectRating) {
-    //     if (moviesOfCorrectRating.includes(movie)) {
-    //       weWantTheseMovies.value.push(movie)
-    //     }
-    //   }
-    // }
-
-
-    // else if ((moviesOfCorrectGenre.length == 0) && (moviesOfCorrectRating.length == 0) && (moviesOfCorrectDirector.length > 0)) {
-    //   for (let movie of moviesOfCorrectDirector) {
-    //     if (moviesOfCorrectDirector.includes(movie)) {
-    //       console.log("movie: " + movie)
-    //       weWantTheseMovies.value.push(movie)
-    //     }
-    //   }
-    // }
-
-
-      // const r = item.IMDB_Rating;
-  
-      // movieTitles.value = movieTitles.value.filter((title) => {
-      //   for (let i in Data) {
-      //     if (r in listOfr) {
-      //       return (title === Data[i].Series_Title)
-      //     }
-      //   }
-      // })
-      //test
-    //}
+    for (let movie of movieTitles.value) {
+      if (moviesOfCorrectGenre.includes(movie) && moviesOfCorrectRating.includes(movie) && moviesOfCorrectDirector.includes(movie) && moviesOfCorrectCast.includes(movie)) {
+        weWantTheseMovies.value.push(movie)
+      }
+    }
   }
 
   function resetFilters() {
     selectedGenres.value = []
     rating.value = ""
     director.value = ""
+    cast.value = ""
     weWantTheseMovies.value = [...movieTitles.value]
   }
   
@@ -272,6 +260,7 @@
               </li>
               <li>
                 <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
+                <small class="form-text text-muted">Ether enter 1 cast member or enter multiple cast members separated by commas</small>
               </li>
               <li v-if="current == 'Home'">
                 <button type="button" class="btn btn-success" @click="fitleredMovies()">Apply Filters</button>
