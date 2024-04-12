@@ -223,22 +223,22 @@
       <div class="navbar-nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">Home</a>
+            <a href="#" :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">Home</a>
           </li>
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
+            <a href="#" :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
           </li>
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'MyMovies', 'nav-link': current != 'MyMovies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
+            <a href="#" :class="{'nav-link active': current == 'MyMovies', 'nav-link': current != 'MyMovies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
               Filter
             </a>
             <ul class="dropdown-menu">
               <li class="dropend">
-                <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
+                <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                   Genre
                 </a>
                 <ul class="dropdown-menu">
@@ -269,7 +269,7 @@
                 <button type="button" class="btn btn-success" @click="fitleredMovies()">Apply Filters</button>
               </li>
               <li v-else-if="current == 'MyMovies'">
-                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Apply Filtesr</button>
+                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Apply Filters</button>
               </li>
               <li v-else>
                 <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Apply Filters</button>
