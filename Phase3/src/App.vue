@@ -212,8 +212,8 @@
 
 <template>
 
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -266,13 +266,13 @@
                 <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
               </li>
               <li v-if="current == 'Home'">
-                <button type="button" class="btn btn-success" @click="fitleredMovies()">Add Filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredMovies()">Apply Filters</button>
               </li>
               <li v-else-if="current == 'MyMovies'">
-                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Add Filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Apply Filtesr</button>
               </li>
               <li v-else>
-                <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Add Filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Apply Filters</button>
               </li>
               <li>
                 <button type="button" class="btn btn-success">Reset Filters</button>
@@ -282,12 +282,11 @@
         </ul>
       </div>
     </div>
-  </div>
   </nav>
 
 
 
-
+<div class="container-fluid" style="padding-top: 10px;">
     <div v-if="loaded">
       <div v-if="current == 'Home'">
         <Home 
@@ -307,4 +306,5 @@
     <div v-else>
       <h1>Loading Data...</h1>
     </div>
+  </div>
 </template>
