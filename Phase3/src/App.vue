@@ -220,8 +220,8 @@
 
 <template>
 
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -231,22 +231,22 @@
       <div class="navbar-nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">Home</a>
+            <a href="#" :class="{'nav-link active': current == 'Home', 'nav-link': current != 'Home'}" aria-current="page" @click="current = 'Home'">Home</a>
           </li>
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
+            <a href="#" :class="{'nav-link active': current == 'Watchlist', 'nav-link': current != 'Watchlist'}" aria-current="page" @click="current = 'Watchlist'">Watchlist</a>
           </li>
           <li class="nav-item">
-            <a :class="{'nav-link active': current == 'MyMovies', 'nav-link': current != 'MyMovies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
+            <a href="#" :class="{'nav-link active': current == 'MyMovies', 'nav-link': current != 'MyMovies'}" aria-current="page" @click="current = 'My Movies'">My Movies</a>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
               Filter
             </a>
             <ul class="dropdown-menu">
               <li class="dropend">
-                <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
+                <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                   Genre
                 </a>
                 <ul class="dropdown-menu">
@@ -274,13 +274,13 @@
                 <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
               </li>
               <li v-if="current == 'Home'">
-                <button type="button" class="btn btn-success" @click="fitleredMovies()">Add Filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredMovies()">Apply Filters</button>
               </li>
               <li v-else-if="current == 'MyMovies'">
-                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Add Filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredMyMovies()">Apply Filters</button>
               </li>
               <li v-else>
-                <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Add Filter</button>
+                <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Apply Filters</button>
               </li>
               <li>
                 <button type="button" class="btn btn-success" @click="resetFilters()">Reset Filters</button>
@@ -290,12 +290,11 @@
         </ul>
       </div>
     </div>
-  </div>
   </nav>
 
 
 
-
+<div class="container-fluid" style="padding-top: 10px;">
     <div v-if="loaded">
       <div v-if="current == 'Home'">
         <Home 
@@ -315,4 +314,5 @@
     <div v-else>
       <h1>Loading Data...</h1>
     </div>
+  </div>
 </template>
