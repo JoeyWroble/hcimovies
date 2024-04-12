@@ -106,6 +106,7 @@
           weWantTheseMovies.value.push(movie)
         }
       }
+  
     // }
     // else if ((moviesOfCorrectGenre.length > 0) && (moviesOfCorrectRating.length > 0) && (moviesOfCorrectDirector.length == 0)) {
     //   for (let movie of moviesOfCorrectGenre) {
@@ -171,6 +172,13 @@
       // })
       //test
     //}
+  }
+
+  function resetFilters() {
+    selectedGenres.value = []
+    rating.value = ""
+    director.value = ""
+    weWantTheseMovies.value = [...movieTitles.value]
   }
   
   onMounted(() => fetch(dataFile)
@@ -275,7 +283,7 @@
                 <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Add Filter</button>
               </li>
               <li>
-                <button type="button" class="btn btn-success">Reset Filters</button>
+                <button type="button" class="btn btn-success" @click="resetFilters()">Reset Filters</button>
               </li>
             </ul>
           </li>
