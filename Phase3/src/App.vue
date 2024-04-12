@@ -117,7 +117,6 @@
           let c4 = Data.value[i].Star4
           c4 = c4.toLowerCase()
           const c = [c1, c2, c3, c4]
-          console.log("c: " + c)
           let s = true
           for (let cc of cast.value) {
             if (!c.includes(cc)) {
