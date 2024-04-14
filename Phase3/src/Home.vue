@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <div class="row row-cols-1 row-cols-md-6 g-4">
     <div class="col" v-for="movie of props.Movies" :key="movie" @click="handleTitleClick(movie)">
       <div class="card h-100">
@@ -28,6 +29,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
   
   <script setup>
@@ -69,3 +71,18 @@
     modal.show();
   }
   </script>
+
+  <style>
+  
+  /* .card-img-top:hover{
+    opacity: 0.5;
+    border: 2px solid blue;
+    cursor: pointer;
+  } */
+
+  .col:hover{
+    opacity: 0.5;
+    border: 2px solid blue;
+    cursor: pointer;
+  }
+</style>
