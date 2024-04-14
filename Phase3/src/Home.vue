@@ -30,7 +30,7 @@
   </template>
   
   <script setup>
-  import { defineProps, ref } from 'vue';
+  import { defineProps, ref, watch } from 'vue';
   import { Modal } from 'bootstrap';
   
   const props = defineProps({
@@ -46,6 +46,20 @@
         }
     }
   }
+
+
+
+  watch(props, () => {
+  imagesForMovies.value = []; // Clear previous images
+  for (let movie of props.Movies) {
+    for (let i in props.data) {
+      if (movie === props.data[i].Series_Title) {
+        imagesForMovies.value.push(props.data[i].Poster_Link);
+        break; // Stop searching after finding the image
+      }
+    }
+  }
+}, { deep: true }); // Watch for changes in nested objects
   function handleTitleClick(movie) {
     const modal = new Modal(document.getElementById('movieModal'));
     const modalTitle = document.getElementById('movieModalLabel');
