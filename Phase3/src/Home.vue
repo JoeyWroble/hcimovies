@@ -1,7 +1,11 @@
 <template>
     <div>
       <div v-for="movie of props.Movies" :key="movie" @click="handleTitleClick(movie)">
-        <span>{{ movie }}</span>
+ 
+        <!-- <span> -->
+            <p>{{ movie }} </p>
+            <p><img :src="imagesForMovies[props.Movies.indexOf(movie)]" alt="Movie Poster"/></p>
+        <!-- </span> -->
       </div>
   
       <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
@@ -26,13 +30,22 @@
   </template>
   
   <script setup>
-  import { defineProps } from 'vue';
+  import { defineProps, ref } from 'vue';
   import { Modal } from 'bootstrap';
   
   const props = defineProps({
-    Movies: Array
+    Movies: Array,
+    data: Object
   });
   
+  const imagesForMovies = ref([])
+  for (let m of props.Movies) {
+    for (let i in props.data) {
+        if (m == props.data[i].Series_Title) {
+            imagesForMovies.value.push(props.data[i].Poster_Link)
+        }
+    }
+  }
   function handleTitleClick(movie) {
     const modal = new Modal(document.getElementById('movieModal'));
     const modalTitle = document.getElementById('movieModalLabel');

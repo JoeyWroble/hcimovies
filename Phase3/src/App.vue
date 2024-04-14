@@ -287,6 +287,7 @@
       <div v-if="current == 'Home'">
         <Home 
           :Movies=weWantTheseMovies
+          :data="Data"
         />
       </div>
       <div v-else-if="current == 'Watchlist'">
