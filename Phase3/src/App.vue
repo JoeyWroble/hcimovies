@@ -252,7 +252,7 @@
                   </li>               
                 </ul>
               </li>
-                <input class="form-control" type="text" v-model="rating" placeholder="Enter rating"/>
+                <input class="form-control" type="text" v-model="rating" placeholder="Enter Rating"/>
                 <small class="form-text text-muted">Rating must be between 7.6 and 9.3. It can be an integer or a decimal rounded to the tenths place.</small>
               <li>
                 <input class="form-control" type="text" v-model="director" placeholder="Enter Director"/>
