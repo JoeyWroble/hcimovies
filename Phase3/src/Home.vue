@@ -73,16 +73,19 @@
   </script>
 
   <style>
-  
-  /* .card-img-top:hover{
-    opacity: 0.5;
-    border: 2px solid blue;
-    cursor: pointer;
-  } */
 
-  .col:hover{
-    opacity: 0.5;
-    border: 2px solid blue;
+  .col:hover .card{
+    opacity: 0.75;
+    box-shadow: 0 0 0 2px blue;
     cursor: pointer;
   }
+
+  .card:hover .card-title {
+    color: black;
+}
+
+    .card-title {
+        text-align: center;
+    }
+
 </style>

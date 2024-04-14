@@ -271,7 +271,7 @@
                 <button type="button" class="btn btn-success" @click="fitleredWatchlist()">Apply Filters</button>
               </li>
               <li>
-                <button type="button" class="btn btn-success" @click="resetFilters()">Reset Filters</button>
+                <button type="button" class="btn btn-danger" @click="resetFilters()">Reset Filters</button>
               </li>
             </ul>
           </li>
