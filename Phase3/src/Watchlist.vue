@@ -10,6 +10,13 @@ function handleTitleClick(movie) {
   const modal = new Modal(document.getElementById('movieModal'));
   modal.show();
 }
+
+function removeFromWatchlist(movie) {
+  const index = props.watchlist.findIndex(m => m.title === movie.title);
+  if (index !== -1) {
+    props.watchlist.splice(index, 1);
+  }
+}
 </script>
 
 <template>
@@ -20,7 +27,8 @@ function handleTitleClick(movie) {
         <div class="card h-100">
           <img :src="movie.poster" class="card-img-top" :alt="`${movie.title} Poster`" style="max-height: 300px; object-fit: cover;">
           <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
+          <h5 class="card-title">{{ movie.title }}</h5>
+          <button class="btn btn-danger btn-sm" @click.stop="removeFromWatchlist(movie)">Remove</button>
           </div>
         </div>
       </div>

@@ -1,40 +1,39 @@
-  <template>
-    <div class="container-fluid">
-      <form class="d-flex search">
-        <input class="form-control me-2 rounded-pill" style="text-align: center;" type="search" placeholder="Search by Title" aria-label="Search">
-        <button class="btn btn-outline-primary rounded-pill" type="submit">Search</button>
-      </form>
-    </div>
-    <div class="container">
-      <div class="row row-cols-1 row-cols-md-6 g-4">
-        <div class="col" v-for="movie of filteredMovies" :key="movie" @click="handleTitleClick(movie)">
-          <div class="card h-100">
-            <img :src="imagesForMovies[movie]" class="card-img-top" :alt="`${movie} Poster`" style="max-height: 300px; object-fit: cover;">
-            <div class="card-body">
-              <h5 class="card-title">{{ movie }}</h5>
-            </div>
+<template>
+  <div class="container-fluid">
+    <form class="d-flex search" @submit.prevent>
+      <input v-model.trim="searchTerm" class="form-control me-2 rounded-pill" style="text-align: center;" type="search" placeholder="Search by Title" aria-label="Search">
+    </form>
+  </div>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+      <div class="col" v-for="movie of filteredMovies" :key="movie" @click="handleTitleClick(movie)">
+        <div class="card h-100">
+          <img :src="imagesForMovies[movie]" class="card-img-top" :alt="`${movie} Poster`" style="max-height: 300px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie }}</h5>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="movieModalLabel">{{ selectedMovie.title }}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <img :src="selectedMovie.poster" class="img-fluid mb-3">
-              <p><strong>Description:</strong> {{ selectedMovie.overview }}</p>
-              <p><strong>Genre(s):</strong> {{ selectedMovie.genres }}</p>
-              <p><strong>Cast:</strong> {{ selectedMovie.cast }}</p>
-              <p><strong>Director:</strong> {{ selectedMovie.director }}</p>
-              <p><strong>Runtime:</strong> {{ selectedMovie.runtime }}</p>
-              <p><strong>Release Year:</strong> {{ selectedMovie.year }}</p>
-              <p><strong>Gross Revenue:</strong> ${{ selectedMovie.gross }} USD</p>
-              <p><strong>IMDB Rating:</strong> {{ selectedMovie.rating }}</p>
-            </div>
-            <div class="modal-footer">
+    </div>
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="movieModalLabel">{{ selectedMovie.title }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img :src="selectedMovie.poster" class="img-fluid mb-3">
+            <p><strong>Description:</strong> {{ selectedMovie.overview }}</p>
+            <p><strong>Genre(s):</strong> {{ selectedMovie.genres }}</p>
+            <p><strong>Cast:</strong> {{ selectedMovie.cast }}</p>
+            <p><strong>Director:</strong> {{ selectedMovie.director }}</p>
+            <p><strong>Runtime:</strong> {{ selectedMovie.runtime }}</p>
+            <p><strong>Release Year:</strong> {{ selectedMovie.year }}</p>
+            <p><strong>Gross Revenue:</strong> ${{ selectedMovie.gross }} USD</p>
+            <p><strong>IMDB Rating:</strong> {{ selectedMovie.rating }}</p>
+          </div>
+          <div class="modal-footer">
               <button class="btn btn-primary" @click.stop="$emit('add-to-watchlist', selectedMovie.title, selectedMovie)">Add to Watchlist</button>
               <button class="btn btn-primary" @click.stop="$emit('add-to-mymovies', selectedMovie.title, selectedMovie)">Add to My Movies</button>
             </div>
