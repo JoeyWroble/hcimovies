@@ -26,10 +26,12 @@
             <div class="modal-body">
               <img :src="selectedMovie.poster" class="img-fluid mb-3">
               <p><strong>Description:</strong> {{ selectedMovie.overview }}</p>
+              <p><strong>Runtime:</strong> {{ selectedMovie.runtime }}</p>
               <p><strong>Genre(s):</strong> {{ selectedMovie.genres }}</p>
               <p><strong>Cast:</strong> {{ selectedMovie.cast }}</p>
               <p><strong>Director:</strong> {{ selectedMovie.director }}</p>
               <p><strong>Release Year:</strong> {{ selectedMovie.year }}</p>
+              <p><strong>Gross Revenue:</strong> ${{ selectedMovie.gross }} USD</p>
               <p><strong>IMDB Rating:</strong> {{ selectedMovie.rating }}</p>
             </div>
             <div class="modal-footer">
@@ -83,13 +85,21 @@
       genres: movieData.Genre,
       year: movieData.Released_Year,
       cast: `${movieData.Star1}, ${movieData.Star2}, ${movieData.Star3}, ${movieData.Star4}`,
+      gross: movieData.Gross,
+      runtime: movieData.Runtime,
       rating: movieData.IMDB_Rating
     };
     const modal = new Modal(document.getElementById('movieModal'));
     modal.show();
   }
-
+  // const title = moveData.Series_Title;
   updateImagesForMovies(props.Movies);
+
+//   function search(){
+//     return fruits.filter((title) =>
+//     title.toLowerCase().includes(input.value.toLowerCase())
+//   );
+// }
   </script>
 
   <style>
