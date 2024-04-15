@@ -26,10 +26,10 @@
             <div class="modal-body">
               <img :src="selectedMovie.poster" class="img-fluid mb-3">
               <p><strong>Description:</strong> {{ selectedMovie.overview }}</p>
-              <p><strong>Runtime:</strong> {{ selectedMovie.runtime }}</p>
               <p><strong>Genre(s):</strong> {{ selectedMovie.genres }}</p>
               <p><strong>Cast:</strong> {{ selectedMovie.cast }}</p>
               <p><strong>Director:</strong> {{ selectedMovie.director }}</p>
+              <p><strong>Runtime:</strong> {{ selectedMovie.runtime }}</p>
               <p><strong>Release Year:</strong> {{ selectedMovie.year }}</p>
               <p><strong>Gross Revenue:</strong> ${{ selectedMovie.gross }} USD</p>
               <p><strong>IMDB Rating:</strong> {{ selectedMovie.rating }}</p>
