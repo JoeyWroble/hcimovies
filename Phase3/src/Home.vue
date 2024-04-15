@@ -35,8 +35,8 @@
               <p><strong>IMDB Rating:</strong> {{ selectedMovie.rating }}</p>
             </div>
             <div class="modal-footer">
-              <a href="#">Add to Watchlist</a>
-              <a href="#">Add to My Movies</a>
+              <button class="btn btn-primary" @click.stop="$emit('add-to-watchlist', selectedMovie.title, selectedMovie)">Add to Watchlist</button>
+              <button class="btn btn-primary" @click.stop="$emit('add-to-mymovies', selectedMovie.title, selectedMovie)">Add to My Movies</button>
             </div>
           </div>
         </div>
@@ -101,6 +101,20 @@
 //   );
 // }
   </script>
+
+<script>
+export default {
+  props: ['Movies'],
+  methods: {
+    addToWatchlist(movie) {
+      this.$emit('add-to-watchlist', movie);
+    },
+    addToMyMovies(movie) {
+      this.$emit('add-to-my-movies', movie);
+    }
+  }
+}
+</script>
 
   <style>
   .col:hover .card {

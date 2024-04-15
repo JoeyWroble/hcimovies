@@ -21,6 +21,8 @@
   const selectedGenres = ref([])
   const rat = ref([])
   const dataFile = "./src/components/imdb_top_1000.csv"
+  const watchlist = ref([]);
+  const mymovies = ref([]);
 
   function fitleredMovies() {
     weWantTheseMovies.value = []
@@ -167,7 +169,47 @@
     cast.value = ""
     weWantTheseMovies.value = [...movieTitles.value]
   }
-  
+
+  function addToWatchlist(movieTitle, movieDetails) {
+  const movieData = {
+    title: movieTitle,
+    overview: movieDetails.overview,
+    poster: movieDetails.poster,
+    director: movieDetails.director,
+    genres: movieDetails.genres,
+    year: movieDetails.year,
+    cast: movieDetails.cast,
+    gross: movieDetails.gross,
+    runtime: movieDetails.runtime,
+    rating: movieDetails.rating
+  };
+
+  if (!watchlist.value.some(movie => movie.title === movieTitle)) {
+    watchlist.value.push(movieData);
+    alert(`Added ${movieTitle} to your watchlist!`);
+  }
+}
+
+function addToMyMovies(movieTitle, movieDetails) {
+  const movieData = {
+    title: movieTitle,
+    overview: movieDetails.overview,
+    poster: movieDetails.poster,
+    director: movieDetails.director,
+    genres: movieDetails.genres,
+    year: movieDetails.year,
+    cast: movieDetails.cast,
+    gross: movieDetails.gross,
+    runtime: movieDetails.runtime,
+    rating: movieDetails.rating
+  };
+
+  if (!mymovies.value.some(movie => movie.title === movieTitle)) {
+    mymovies.value.push(movieData);
+    alert(`Added ${movieTitle} to your My Movies!`);
+  }
+}
+
   onMounted(() => fetch(dataFile)
     .then((res) => res.text())
     .then((text) => loadData(text))
@@ -286,17 +328,17 @@
     <div v-if="loaded">
       <div v-if="current == 'Home'">
         <Home 
-          :Movies=weWantTheseMovies
+          :Movies="weWantTheseMovies"
           :data="Data"
+          @add-to-watchlist="addToWatchlist"
+          @add-to-mymovies="addToMyMovies"
         />
       </div>
       <div v-else-if="current == 'Watchlist'">
-        <Watchlist
-        />
+        <Watchlist :watchlist="watchlist"/>
       </div>
       <div v-else>
-        <MyMovies
-        />
+        <MyMovies :mymovies="mymovies"/>
       </div>
     </div>
 
