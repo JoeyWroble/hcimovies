@@ -56,26 +56,56 @@
 
 
     let moviesOfCorrectRating = []
-    if (typeof rating.value == 'string' && rating.value.length > 0) {
-      //if (rating.value.length > 0) {
-        const ratingMap = {'7': ["7", "7.1", "7.2", "7.3", "7.4", "7.5", "7.6", "7.7", "7.8", "7.9"], '8': ["8.1", "8.2", "8.3", "8.4", "8.5", "8.6", "8.7", "8.8", "8.9"], '9': ["9", "9.1", "9.2", "9.3"]}
-        if (rating.value.length == 3 && rating.value.split(".").length == 2) {
-          for (let i in Data.value) {
-            if (Data.value[i].IMDB_Rating == rating.value) {
-              moviesOfCorrectRating.push(Data.value[i].Series_Title)
+    if (typeof rating.value == 'string' && rating.value.length == 3) {
+      console.log("rating is of length 3")
+      if ("." == rating.value[1]) {
+        if (7 == rating.value[0]) {
+          if (["6", "7", "8", "9"].includes(rating.value[2])) {
+            for (let i in Data.value) {
+              if (Data.value[i].IMDB_Rating == rating.value) {
+                moviesOfCorrectRating.push(Data.value[i].Series_Title)
+              }
             }
           }
         }
-        else if (rating.value.length == 1 && ['7', '8', '9'].includes(rating.value)) {
-          for (let i = 0; i < Data.value.length; i++) {
-            if (ratingMap[rating.value].includes(Data.value[i].IMDB_Rating)) {
-              moviesOfCorrectRating.push(Data.value[i].Series_Title)
+
+
+        if (8 == rating.value[0]) {
+          console.log("first digit is 8")
+          if (["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(rating.value[2])) {
+            console.log("second digit is: " + rating.value[2])
+              if (Data.value[i].IMDB_Rating == rating.value) {
+                moviesOfCorrectRating.push(Data.value[i].Series_Title)
+              }
             }
           }
-          
+        
+        
+
+
+
+
+        if (9 == rating.value[0]) {
+          if (["2", "3"].includes(rating.value[2])) {
+            for (let i in Data.value) {
+              if (Data.value[i].IMDB_Rating == rating.value) {
+                moviesOfCorrectRating.push(Data.value[i].Series_Title)
+              }
+            }
+          }
         }
-      //}
+      }
     }
+
+    else if (rating.value.length == 1 && ['7', '8', '9'].includes(rating.value)) {
+      const ratingMap = {'7': ["7.6", "7.7", "7.8", "7.9"], '8': ["8", "8.1", "8.2", "8.3", "8.4", "8.5", "8.6", "8.7", "8.8", "8.9"], '9': ["9", "9.2", "9.3"]}
+              for (let i = 0; i < Data.value.length; i++) {
+                if (ratingMap[rating.value].includes(Data.value[i].IMDB_Rating)) {
+                  moviesOfCorrectRating.push(Data.value[i].Series_Title)
+                }
+              }
+              
+            }
     else {
       for (let movie of movieTitles.value) {
         moviesOfCorrectRating.push(movie)
