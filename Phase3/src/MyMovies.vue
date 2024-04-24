@@ -10,7 +10,7 @@ function handleTitleClick(movie) {
   const modal = new Modal(document.getElementById('movieModal'));
   modal.show();
 }
-function removeFromMyMovies(movie) {
+function removeFromMyMovies(movie) { // remove button
   const index = props.mymovies.findIndex(m => m.title === movie.title);
   if (index !== -1) {
     props.mymovies.splice(index, 1);
@@ -27,7 +27,7 @@ function removeFromMyMovies(movie) {
           <img :src="movie.poster" class="card-img-top" :alt="`${movie.title} Poster`" style="max-height: 300px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">{{ movie.title }}</h5>
-            <button class="btn btn-danger btn-sm" @click.stop="removeFromMyMovies(movie)">Remove</button>
+            <button class="btn btn-danger btn-sm" @click.stop="removeFromMyMovies(movie)">Remove</button> <!-- button to remove -->
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ function removeFromMyMovies(movie) {
             <h5 class="modal-title" id="movieModalLabel">{{ selectedMovie.title }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body"> <!-- displays movie info and card -->
             <img :src="selectedMovie.poster" class="img-fluid mb-3">
             <p><strong>Description:</strong> {{ selectedMovie.overview }}</p>
             <p><strong>Genre(s):</strong> {{ selectedMovie.genres }}</p>

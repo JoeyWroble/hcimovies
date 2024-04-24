@@ -192,7 +192,7 @@
     }
   }
 
-  function resetFilters() {
+  function resetFilters() { // resets the filter
     selectedGenres.value = []
     rating.value = ""
     director.value = ""
@@ -200,7 +200,7 @@
     weWantTheseMovies.value = [...movieTitles.value]
   }
 
-  function addToWatchlist(movieTitle, movieDetails) {
+  function addToWatchlist(movieTitle, movieDetails) { // adds a movie to the watchlist by putting all of the details into one thing
   const movieData = {
     title: movieTitle,
     overview: movieDetails.overview,
@@ -216,11 +216,11 @@
 
   if (!watchlist.value.some(movie => movie.title === movieTitle)) {
     watchlist.value.push(movieData);
-    alert(`Added ${movieTitle} to your watchlist!`);
+    alert(`Added ${movieTitle} to your watchlist!`); // This function alerts the user that they have successfully added a movie to the watchlist.
   }
 }
 
-function addToMyMovies(movieTitle, movieDetails) {
+function addToMyMovies(movieTitle, movieDetails) { // same as watchlist function
   const movieData = {
     title: movieTitle,
     overview: movieDetails.overview,
