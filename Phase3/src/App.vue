@@ -114,7 +114,7 @@
     }
 
     // If the rating is a valid integer
-    else if (rating.value.length == 1 && ['7', '8', '9'].includes(rating.value)) {
+    else if (typeof rating.value == 'string' && rating.value.length == 1 && ['7', '8', '9'].includes(rating.value)) {
       const ratingMap = {'7': ["7.6", "7.7", "7.8", "7.9"], '8': ["8", "8.1", "8.2", "8.3", "8.4", "8.5", "8.6", "8.7", "8.8", "8.9"], '9': ["9", "9.2", "9.3"]}
       for (let i = 0; i < Data.value.length; i++) {
         // For each row, if the IMDB rating is some variation of the integer rating input,
