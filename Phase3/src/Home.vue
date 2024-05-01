@@ -63,7 +63,7 @@ watch(() => props.Movies, (newMovies) => {
   updateFilteredMovies(newMovies);
 });
 
-// Utilized ChatGPT to solve poster images not syncing with filtering error
+// Utilized ChatGPT to solve poster images not syncing with filtering error (I had no idea what was causing this or how to fix it)
 function updateImagesForMovies(movies) {
   imagesForMovies.value = {};
   for (let movie of movies) {
