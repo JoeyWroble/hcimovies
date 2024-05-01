@@ -1,9 +1,11 @@
 <template>
+  <!-- Displays the search bar -->
   <div class="container-fluid">
     <form class="d-flex search" @submit.prevent>
       <input v-model.trim="searchTerm" class="form-control me-2 rounded-pill" style="text-align: center;" type="search" placeholder="Search by Title">
     </form>
   </div>
+  <!-- Displays the movies with their title and cover image -->
   <div class="container">
     <div class="row row-cols-1 row-cols-md-6 g-4">
       <div class="col" v-for="movie of filteredMovies" :key="movie" @click="handleTitleClick(movie)">
@@ -15,6 +17,7 @@
         </div>
       </div>
     </div>
+    <!-- Displays the modal window containing information about the film -->
     <div class="modal fade" id="movieModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -33,6 +36,7 @@
             <p><strong>Gross Revenue:</strong> ${{ selectedMovie.gross }} USD</p>
             <p><strong>IMDB Rating:</strong> {{ selectedMovie.rating }}</p>
           </div>
+          <!-- Buttons in the footer of the modal to add movie to a list -->
           <div class="modal-footer">
               <button class="btn btn-primary" @click.stop="$emit('add-to-watchlist', selectedMovie.title, selectedMovie)">Add to Watchlist</button>
               <button class="btn btn-primary" @click.stop="$emit('add-to-mymovies', selectedMovie.title, selectedMovie)">Add to My Movies</button>
@@ -45,6 +49,7 @@
 
 <script setup>
 import { defineProps, ref, watch } from 'vue';
+// Imported the modal implementation from bootstrap
 import { Modal } from 'bootstrap';
 
 const props = defineProps({ Movies: Array, data: Object });
@@ -75,6 +80,7 @@ function updateFilteredMovies(movies) {
   filteredMovies.value = movies;
 }
 
+// Sets data to variables, used to display information in modal window when the movie is clicked
 function handleTitleClick(movie) {
   const movieData = props.data.find(item => item.Series_Title === movie);
   selectedMovie.value = {
@@ -89,10 +95,12 @@ function handleTitleClick(movie) {
     runtime: movieData.Runtime,
     rating: movieData.IMDB_Rating
   };
+  // Creates the modal variable
   const modal = new Modal(document.getElementById('movieModal'));
   modal.show();
 }
 
+// Search bar functionality
 watch(searchTerm, (newValue) => {
   filterMovies(newValue);
 });

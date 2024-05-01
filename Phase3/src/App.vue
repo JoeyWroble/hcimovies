@@ -374,13 +374,12 @@ function addToMyMovies(movieTitle, movieDetails) { // same as watchlist function
                 </ul>
               </li>
                 <input class="form-control" type="text" v-model="rating" placeholder="Enter Rating"/>
-                <small class="form-text text-muted">Rating must be between 7.6 and 9.3. It can be an integer or a decimal rounded to the tenths place.</small>
               <li>
                 <input class="form-control" type="text" v-model="director" placeholder="Enter Director"/>
               </li>
               <li>
                 <input class="form-control" type="text" v-model="cast" placeholder="Enter Cast"/>
-                <small class="form-text text-muted">Ether enter 1 cast member or enter multiple cast members separated by commas</small>
+                <small class="form-text text-muted">Seperate Cast Members by Commas</small>
               </li>
 
 
