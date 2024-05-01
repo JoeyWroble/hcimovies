@@ -110,8 +110,8 @@ updateImagesForMovies(props.Movies);
 
 </script>
 
-<script>
-export default {
+<script> // got inspiration from online for a code that adds an item to a list on another page 
+export default { // serves as a bridge for emitting events to trigger actions in its parent component
   props: ['Movies'],
   methods: {
     addToWatchlist(movie) {

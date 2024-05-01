@@ -11,7 +11,7 @@ function handleTitleClick(movie) {
   modal.show();
 }
 
-function removeFromWatchlist(movie) {
+function removeFromWatchlist(movie) { // remove function
   const index = props.watchlist.findIndex(m => m.title === movie.title);
   if (index !== -1) {
     props.watchlist.splice(index, 1);
@@ -46,7 +46,7 @@ function removeFromWatchlist(movie) {
             <h5 class="modal-title" id="movieModalLabel">{{ selectedMovie.title }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body"> <!-- displays movie info and card -->
             <img :src="selectedMovie.poster" class="img-fluid mb-3">
             <p><strong>Description:</strong> {{ selectedMovie.overview }}</p>
             <p><strong>Genre(s):</strong> {{ selectedMovie.genres }}</p>
