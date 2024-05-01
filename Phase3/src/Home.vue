@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <form class="d-flex search" @submit.prevent>
-      <input v-model.trim="searchTerm" class="form-control me-2 rounded-pill" style="text-align: center;" type="search" placeholder="Search by Title" aria-label="Search">
+      <input v-model.trim="searchTerm" class="form-control me-2 rounded-pill" style="text-align: center;" type="search" placeholder="Search by Title">
     </form>
   </div>
   <div class="container">
@@ -15,12 +15,12 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+    <div class="modal fade" id="movieModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="movieModalLabel">{{ selectedMovie.title }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <img :src="selectedMovie.poster" class="img-fluid mb-3">
@@ -58,6 +58,7 @@ watch(() => props.Movies, (newMovies) => {
   updateFilteredMovies(newMovies);
 });
 
+// Utilized ChatGPT to solve poster images not syncing with filtering error
 function updateImagesForMovies(movies) {
   imagesForMovies.value = {};
   for (let movie of movies) {

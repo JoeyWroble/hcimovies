@@ -19,6 +19,11 @@ function removeFromMyMovies(movie) {
 </script>
 
 <template>
+    <div class="container-fluid">
+    <form class="d-flex search" @submit.prevent>
+      <input v-model.trim="searchTerm" class="form-control me-2 rounded-pill" style="text-align: center;" type="search" placeholder="Search by Title">
+    </form>
+  </div>
   <div>
     <h2>My Movies</h2>
     <div class="row row-cols-1 row-cols-md-6 g-4">
